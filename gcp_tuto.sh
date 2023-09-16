@@ -27,7 +27,8 @@ gcloud artifacts repositories \
 
 # crée l'image
 docker build -t \
-    ${REGION}-docker.pkg.dev/${PROJECT_ID}/hello-repo/hello-app:v1 \
+    ${REGION}-docker.pkg.dev/${PROJECT_ID}/cykt/cykt-app:v1 \
+    --build-arg POSTGRESQL_DATABASE_URL=34.76.79.249:5432/cykt \
     .
 
 # verifier
