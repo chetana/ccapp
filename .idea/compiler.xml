@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cykt-persistence" />
+        <module name="cykt-mapper" />
+        <module name="cykt-business" />
+        <module name="cykt-dto" />
+        <module name="cykt-app" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dam-application" target="17" />
+      <module name="dam-model" target="17" />
+      <module name="dam-sdk" target="17" />
+      <module name="djust-starters" target="17" />
+      <module name="djustdam" target="17" />
+      <module name="tenant-management" target="17" />
+      <module name="tenant-management-data-jpa-spring-boot-starter" target="17" />
+      <module name="tenant-management-web-spring-boot-starter" target="17" />
+      <module name="tenant-manager" target="17" />
+      <module name="tenant-manager-application" target="17" />
+      <module name="tenant-manager-application (1)" target="17" />
+      <module name="tenant-manager-application (2)" target="17" />
+      <module name="tenant-manager-client" target="17" />
+      <module name="tenant-manager-client-http-spring-boot-starter" target="17" />
+      <module name="tenant-manager-context" target="17" />
+      <module name="tenant-manager-dto" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cykt-app" options="-parameters" />
+      <module name="cykt-business" options="-parameters" />
+      <module name="cykt-dto" options="-parameters" />
+      <module name="cykt-mapper" options="-parameters" />
+      <module name="cykt-persistence" options="-parameters" />
+      <module name="dam-application" options="-parameters" />
+      <module name="dam-model" options="-parameters" />
+      <module name="dam-sdk" options="-parameters" />
+      <module name="tenant-management-data-jpa-spring-boot-starter" options="-parameters" />
+      <module name="tenant-management-web-spring-boot-starter" options="-parameters" />
+      <module name="tenant-manager-application" options="-parameters" />
+      <module name="tenant-manager-application (1)" options="-parameters" />
+      <module name="tenant-manager-application (2)" options="-parameters" />
+      <module name="tenant-manager-client-http-spring-boot-starter" options="-parameters" />
+      <module name="tenant-manager-context" options="-parameters" />
+      <module name="tenant-manager-dto" options="-parameters" />
+    </option>
+  </component>
+</project>

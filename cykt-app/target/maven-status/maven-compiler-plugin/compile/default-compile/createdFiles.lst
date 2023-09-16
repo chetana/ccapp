@@ -1,0 +1,5 @@
+com/cykt/app/persistence/ChefRepository.class
+com/cykt/app/entity/ChefEntity.class
+com/cykt/app/CyKtApp.class
+com/cykt/app/entity/ChefEntity$ChefEntityBuilder.class
+com/cykt/app/controller/ChefController.class

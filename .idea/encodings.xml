@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/cykt-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cykt-business/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cykt-dto/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cykt-mapper/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cykt-persistence/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cykt-persistence/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam/dam-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam/dam-model/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam/dam-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-app/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-app/tenant-manager-application/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-client/tenant-manager-client-http-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-client/tenant-manager-dto/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/tenant-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/tenant-management/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/tenant-management/tenant-management-data-jpa-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/tenant-management/tenant-management-web-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/tenant-management/tenant-manager-context/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tm/tm-starter/tenant-manager-application/src/main/java" charset="UTF-8" />
+  </component>
+</project>

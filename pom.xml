@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.5</version>
+        <relativePath /> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.cykt</groupId>
+    <artifactId>cykt-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>cykt-parent</name>
+    <description>First app by CyKt</description>
+    <modules>
+        <module>cykt-app</module>
+        <module>cykt-dto</module>
+        <module>cykt-business</module>
+        <module>cykt-persistence</module>
+        <module>cykt-mapper</module>
+    </modules>
+
+    <scm>
+        <developerConnection>scm:git:git@gitlab.com:djustlab/pay.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+
+<!--    <distributionManagement>-->
+<!--        <repository>-->
+<!--            <id>gitlab-maven</id>-->
+<!--            <url>https://gitlab.com/api/v4/projects/42739788/packages/maven</url>-->
+<!--        </repository>-->
+<!--        <snapshotRepository>-->
+<!--            <id>gitlab-maven</id>-->
+<!--            <url>https://gitlab.com/api/v4/projects/42739788/packages/maven</url>-->
+<!--        </snapshotRepository>-->
+<!--    </distributionManagement>-->
+
+    <properties>
+        <next-rc>1</next-rc>
+        <!--suppress UnresolvedMavenProperty -->
+        <next-major-version>${parsedVersion.nextMajorVersion}.0.0-SNAPSHOT</next-major-version>
+        <!--suppress UnresolvedMavenProperty -->
+
+        <next-minor-version>${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.0-SNAPSHOT
+        </next-minor-version>
+        <next-patch-version>
+            <!--suppress UnresolvedMavenProperty -->
+            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.nextIncrementalVersion}-SNAPSHOT
+        </next-patch-version>
+        <next-rc-version>
+            <!--suppress UnresolvedMavenProperty -->
+            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}-RC-${next-rc}
+        </next-rc-version>
+        <next-release-version>
+            <!--suppress UnresolvedMavenProperty -->
+            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
+        </next-release-version>
+
+        <java.version>17</java.version>
+        <lombok.version>1.18.24</lombok.version>
+        <spring-web.version>6.0.7</spring-web.version>
+        <spring-cloud-starter-openfeign.version>4.0.1</spring-cloud-starter-openfeign.version>
+        <openfeign.version>12.2</openfeign.version>
+        <maven.failsafe.plugin.version>2.22.0</maven.failsafe.plugin.version>
+        <tenant-management-starters.version>2.1.0</tenant-management-starters.version>
+        <tenant-manager-client.version>2.1.6</tenant-manager-client.version>
+        <spring-data-mongodb.version>4.0.4</spring-data-mongodb.version>
+        <mongodb-driver.version>4.8.2</mongodb-driver.version>
+        <spring-cloud-aws-sqs.version>3.0.1</spring-cloud-aws-sqs.version>
+        <spring-boot-configuration-processor.version>3.0.5</spring-boot-configuration-processor.version>
+        <spring-boot-starter-test.version>3.0.5</spring-boot-starter-test.version>
+        <spring-boot-starter-web.version>3.0.5</spring-boot-starter-web.version>
+        <spring-boot-starter-cache.version>3.0.6</spring-boot-starter-cache.version>
+        <caffeine.version>3.1.6</caffeine.version>
+
+        <hibernate-types-60.version>2.21.1</hibernate-types-60.version>
+        <hypersistence-utils-hibernate-62.version>3.4.3</hypersistence-utils-hibernate-62.version>
+        <hibernate-core.version>6.2.5.Final</hibernate-core.version>
+
+        <mvn.helper.plugin.version>3.2.0</mvn.helper.plugin.version>
+        <mvn.release.plugin.version>3.0.0-M5</mvn.release.plugin.version>
+        <mvn.version.plugin.version>2.8.1</mvn.version.plugin.version>
+
+        <mangopay2-java-sdk.version>2.29.0</mangopay2-java-sdk.version>
+
+        <pay-dto.version>0.1.0-RC</pay-dto.version>
+        <djust-pay-starter-lemonway.version>0.1.0-RC</djust-pay-starter-lemonway.version>
+        <pay-contract.version>0.1.0-RC</pay-contract.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- CYKT -->
+            <dependency>
+                <groupId>com.cykt</groupId>
+                <artifactId>cykt-mapper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cykt</groupId>
+                <artifactId>cykt-dto</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cykt</groupId>
+                <artifactId>cykt-business</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cykt</groupId>
+                <artifactId>cykt-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-starter-openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign.form</groupId>
+                <artifactId>feign-form</artifactId>
+                <version>3.8.0</version>
+            </dependency>
+
+            <!-- persistence pgsql -->
+            <dependency>
+                <groupId>io.hypersistence</groupId>
+                <artifactId>hypersistence-utils-hibernate-62</artifactId>
+                <version>${hypersistence-utils-hibernate-62.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.vladmihalcea</groupId>
+                <artifactId>hibernate-types-60</artifactId>
+                <version>${hibernate-types-60.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring-boot-configuration-processor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <scope>test</scope>
+                <version>${spring-boot-starter-test.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <optional>true</optional>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-cache</artifactId>
+                <version>${spring-boot-starter-cache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <repositories>
+        <repository>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/groups/13169478/-/packages/maven</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>17</source>
+                        <target>17</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${mvn.release.plugin.version}</version>
+                    <configuration>
+                        <scmDevelopmentCommitComment>:arrow_up: prepare for next development iteration
+                        </scmDevelopmentCommitComment>
+                        <scmReleaseCommitComment>:bookmark: prepare release @{releaseLabel}</scmReleaseCommitComment>
+                        <scmRollbackCommitComment>:rewind: rollback the release of @{releaseLabel}
+                        </scmRollbackCommitComment>
+                        <preparationGoals>clean package -DskipTests</preparationGoals>
+                        <goals>deploy -DskipTests</goals>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${mvn.helper.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>parse-version</id>
+                            <goals>
+                                <goal>parse-version</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${mvn.version.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${mvn.release.plugin.version}</version>
+                <configuration>
+                    <scmDevelopmentCommitComment>:arrow_up: prepare for next development iteration
+                    </scmDevelopmentCommitComment>
+                    <scmReleaseCommitComment>:bookmark: prepare release @{releaseLabel}</scmReleaseCommitComment>
+                    <scmRollbackCommitComment>:rewind: rollback the release of @{releaseLabel}
+                    </scmRollbackCommitComment>
+                    <preparationGoals>clean package -DskipTests</preparationGoals>
+                    <goals>deploy -DskipTests</goals>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${mvn.helper.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${mvn.version.plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>coverage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.8</version>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <formats>
+                                        <format>XML</format>
+                                    </formats>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>bump-patch</id>
+            <activation>
+                <property>
+                    <name>bumpPatch</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-help-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>evaluate</goal>
+                                </goals>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <expression>next-patch-version</expression>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>bump-minor</id>
+            <activation>
+                <property>
+                    <name>bumpMinor</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-help-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>evaluate</goal>
+                                </goals>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <expression>next-minor-version</expression>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>bump-major</id>
+            <activation>
+                <property>
+                    <name>bumpMajor</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-help-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>evaluate</goal>
+                                </goals>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <expression>next-major-version</expression>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>bump-release</id>
+            <activation>
+                <property>
+                    <name>bumpRelease</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-help-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>evaluate</goal>
+                                </goals>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <expression>next-release-version</expression>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>bump-rc</id>
+            <activation>
+                <property>
+                    <name>bumpRC</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-help-plugin</artifactId>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>evaluate</goal>
+                                </goals>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <expression>next-rc-version</expression>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
