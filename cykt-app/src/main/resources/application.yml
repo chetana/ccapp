@@ -6,7 +6,7 @@ spring:
   datasource:
     username: ${POSTGRESQL_USER:postgres}
     password: ${POSTGRESQL_PASSWORD:cykt}
-    url: jdbc:postgresql://${POSTGRESQL_DATABASE_URL:34.77.74.176:5432/cykt}
+    url: jdbc:postgresql://${POSTGRESQL_DATABASE_URL:10.93.224.3:5432/cykt}
 
     hikari:
       connection-timeout: ${HIKARI_CONNECTION_TIMEOUT:10000}
