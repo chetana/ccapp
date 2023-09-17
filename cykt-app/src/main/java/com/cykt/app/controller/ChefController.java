@@ -4,6 +4,7 @@ import com.cykt.app.persistence.ChefRepository;
 import com.cykt.dto.Chef;
 import com.cykt.mapper.ChefMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class ChefController {
     private final ChefRepository chefRepository;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("{chefName}")
     public Chef getByname(@PathVariable String chefName) {
         return new Chef(chefRepository.findByName(chefName).orElseThrow().getName());
