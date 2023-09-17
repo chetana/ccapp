@@ -1,0 +1,128 @@
+= Déployer une application sur GCP
+
+:toc:
+
+[NOTE]
+====
+* Les commandes en ligne sont effectuées sur *Google Cloud Shell*, un outil qui permet de gérer les ressources hébergées sur la plateforme Google Cloud.
+
+* Aller sur Google Cloud Shell depuis l'interface du projet GCP
+====
+
+
+== Créer un repo sur GCP
+
+[source, bash]
+----
+# Attention: ne pas confondre avec le nom du projet ! On trouve le PROJECT_ID dans la page d'accueil section Informations du Projet
+export PROJECT_ID=cykt-399216
+
+# Indiquer une région (on prend la Belgique)
+gcloud artifacts locations list
+export REGION=europe-west1
+
+# cyktapp est le nom du repo
+gcloud artifacts repositories \
+    create cyktapp \
+    --repository-format=docker \
+    --location=${REGION} \
+    --description="Docker \
+    repository"
+----
+
+
+== Créer l'image Docker et la transférer sur le repo
+
+[source, bash]
+----
+# Cloner le projet
+git clone https://github.com/chetana/ccapp.git
+cd ccapp
+
+# Créer l'image Docker
+docker build -t \
+    ${REGION}-docker.pkg.dev/${PROJECT_ID}/cyktapp/cykt-app:v1 .
+docker images
+
+# Transférer l'image Docker dans l'Artifact Registry
+# Assurez vous que l'API est enable chez vous
+gcloud services enable artifactregistry.googleapis.com
+
+# Configurez l'outil en ligne de cmd
+gcloud auth configure-docker ${REGION}-docker.pkg.dev
+
+# Transférer l'image sur le repo
+docker push ${REGION}-docker.pkg.dev/${PROJECT_ID}/cyktapp/cykt-app:v1
+----
+
+
+== Créer un cluster GKE et déployer l'application
+
+[source, bash]
+----
+# Définir l'id du projet pour l'outil
+gcloud config set project ${PROJECT_ID}
+
+# Définir une zone
+gcloud compute zones list
+export COMPUTE_ZONE=europe-west10-a
+gcloud config set compute/zone ${COMPUTE_ZONE}
+
+# Créer un cluster
+gcloud container clusters create cykt-cluster
+
+# Afficher les noeuds créés
+kubectl get nodes
+
+# Déployer une application sur GKE
+# vérifier que vous êtes connecté à votre cluster GKE
+gcloud container clusters \
+    get-credentials cykt-cluster \
+    --zone ${COMPUTE_ZONE}
+
+# Créer un déploiement Kubernetes
+kubectl create deployment \
+    cykt-app \
+    --image=${REGION}-docker.pkg.dev/${PROJECT_ID}/cyktapp/cykt-app:v1
+# Définir le nombre de référence d'instance dupliquées de déploiement sur 3
+kubectl scale deployment hello-app \
+    --replicas=3
+# Créer une ressource HorizontalPodAutoscaler pour votre déploiement.
+kubectl autoscale deployment \
+    hello-app --cpu-percent=80 \
+    --min=1 --max=5
+# Vérifier les pods créés
+kubectl get pods
+
+# Si on veut supprimer un pod ou un déploiement
+kubectl delete pod <pod_name>
+kubectl delete deployment <pod_name>
+
+# Si on veut voir les logs
+kubectl logs <pod_name>
+----
+
+[IMPORTANT] 
+====
+Dans le cas d'une instance d'une base de données, il faut que la BDD et l'application soient sur le même réseau pour pouvoir communiquer.
+. Aller sur le service SQL de GCP
+. Ajouter un accès sur VPC
+====
+
+
+== Exposer l'application sur Internet
+
+* Les Services Kubernetes regroupent les pods dans une adresse IP statique, accessible depuis n'importe quel pod du cluster.
+* Le type de service par défaut dans GKE est appelé *ClusterIP*, où le service obtient une adresse IP accessible uniquement à partir du cluster.
+* Pour exposer un service Kubernetes en dehors du cluster, créez un service de LoadBalancer. Ce type de service génère une adresse IP d'équilibreur de charge externe pour un ensemble dynamique de pods, accessible via Internet.
+
+[source, bash]
+----
+# Générer un service Kube pour le déploiement
+kubectl expose deployment \
+    cykt-app \
+    --name=cykt-app-service \
+    --type=LoadBalancer --port 80 \
+    --target-port 8080
+kubectl get service
+----

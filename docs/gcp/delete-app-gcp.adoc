@@ -1,0 +1,16 @@
+== Suppression du projet afin de ne pas être facturé
+
+[source, bash]
+----
+# Supprimer le projet
+gcloud projects delete ${PROJECT_ID}
+
+# Supprimer le service
+kubectl delete service <service_name>
+
+# Supprimer vos images de conteneurs : cette étape supprime les images Docker que vous avez transférées dans Artifact Registry.
+gcloud artifacts docker images \
+    delete \
+    ${REGION}-docker.pkg.dev/${PROJECT_ID}/<repo_name>/<app_name>:v1 \
+    --delete-tags --quiet
+----
