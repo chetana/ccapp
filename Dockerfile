@@ -23,7 +23,7 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Copiez le fichier JAR généré lors de la construction dans le répertoire de travail
-COPY --from=build /app/target/cykt-app.jar ./app.jar
+COPY --from=build /app/cykt-app/target/cykt-app.jar ./app.jar
 
 # Exposez le port sur lequel l'application écoutera (ajustez si nécessaire)
 EXPOSE 8080
